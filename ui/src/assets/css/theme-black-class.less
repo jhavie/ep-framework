@@ -1,0 +1,66 @@
+@import "./vars.less";
+//--------------------- main.css ----------------------
+#app {
+  color: @color-font;
+  background: @color-light-background;
+
+  //------------- main.css -------------
+  .contents-card {
+    background: @color-dark-background;
+    color: @color-font;
+  }
+  .no-data-div, .no-data-div-mini, .no-data-div-circle {
+    background-color: @color-light-background;
+  }
+  //------------- panel.less -------------
+  .panel-main {
+    background-color: @color-light-background;
+  }
+  .panel-copyright>p {
+    color: @color-font;
+  }
+  .panel-change-skin {
+    color: #222;
+  }
+  //------------- 登录页 -------------
+  .login-right {
+    background: #808a98;
+  }
+  .login-block {
+    background: #353b47;
+  }
+  .login-main-block {
+    background: #505766;
+  }
+
+  //------------- 标签组件 -------------
+  .tab-main {
+    background-color: @color-light-background;
+    border-bottom-color: @color-dark-background;
+  }
+  .tab-scroll > span {
+    background-color: @color-dark-background;
+    border-color: @color-dark-background;
+  }
+  .tab-func {
+    background-color: rgba(@color-light-background, .3);
+    border-bottom-color: @color-dark-background;
+    //color: @color-font;
+  }
+  .tab-black > {
+    .active {
+      color: @color-main;
+      .tab-icon-dot {
+        background: @color-main;
+      }
+    }
+  }
+}
+
+//------------- 模态框 -------------
+body {
+  .ep-model-body > span {
+    color: @color-font;
+  }
+}
+

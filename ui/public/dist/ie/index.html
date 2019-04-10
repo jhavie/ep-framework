@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="renderer" content="webkit">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title v-text="不支持老IE"></title>
+    <link rel="stylesheet" type="text/css" href="./ie.css">
+    <script>
+        ;
+        (function (window, document, getBrowserInfo, undefined) {
+            'use strict';
+            var browserInfo = getBrowserInfo(window.navigator.userAgent),
+                    ver = parseInt(browserInfo["version"], 10) || 0,
+                    fillBody = null;
+            if ((browserInfo["msie"] && ver < 9) ||
+                    (browserInfo["chrome"] && ver < 20) ||
+                    (browserInfo["firefox"] && ver < 20) ||
+                    (browserInfo["safari"] && ver < 5)) {
+                fillBody = function () {
+                    document.body.innerHTML = '<div class="say_bay"><div class="outer-north">' +
+                            '</div><h3>您使用的浏览器版本过低，建议您使用以下浏览器进行访问。</h3><p class="p">点击以下链接，升级浏览器</p><div class="browser">' +
+                            ' <a href="https://www.google.cn/chrome/" target="_blank"><ul class="download-browser"><li>' +
+                            '<img src="./img/chrome.png"></li><li style="cursor:hand">Chrome<p class="help-text">(20.0及以上)</p></li></ul>' +
+                            '</a> ' +
+                            '<a href="https://www.mozilla.org/en-US/firefox/new/" target="_blank"><ul class="download-browser"><li>' +
+                            '<img src="./img/firefox.png"></li><li style="cursor:hand">Firefox<p class="help-text">(20.0及以上)</p></li></ul>' +
+                            '</a> ' +
+                            '<a href="https://www.apple.com/safari/" target="_blank"><ul class="download-browser"><li>' +
+                            '<img src="./img/safari.png"></li><li style="cursor:hand">Safari<p class="help-text">(5.0及以上)</p></li></ul>' +
+                            '</a>' +
+                            '<a href="http://www.microsoft.com/zh-cn/download/internet-explorer-9-details.aspx" target="_blank"><ul class="download-browser"><li>' +
+                            '<img src="./img/ie.png" /></li><li style="cursor:hand">Internet Explorer<p class="help-text">(10.0及以上)</p></li></ul>' +
+                            '</a></div></div>';
+                };
+                if (document.addEventListener) {
+                    document.addEventListener("DOMContentLoaded", fillBody, false);
+                } else {
+                    document.attachEvent("onreadystatechange", fillBody);
+                }
+            }
+        }(window, document, function (userAgent) {
+            var browser = {},
+                    matched = (function (ua) {
+                        var match = /(chrome)[ \/]([\w.]+)/.exec(ua) ||
+                                ///(webkit)[ \/]([\w.]+)/.exec( ua ) ||
+                                ///version[\/][\d.]+.*(safari)[ \/]([\w.]+)/.exec(ua) ||
+                                /version[\/]([\d.]+).*(safari)[ \/][\w.]+/.exec(ua) ||
+                                /(msie) ([\w.]+)/.exec(ua) ||
+                                /(firefox)[\/]([\w.]+)/.exec(ua) ||
+                                /(opera)(?:.*version|)[ \/]([\w.]+)/.exec(ua) ||
+                                ua.indexOf("compatible") < 0 && /(mozilla)(?:.*? rv:([\w.]+)|)/.exec(ua) || [];
+                        if (match[2] === "safari") {
+                            return {
+                                browser: match[2] || "",
+                                version: match[1] || "0"
+                            };
+                        }
+                        ;
+                        return {
+                            browser: match[1] || "",
+                            version: match[2] || "0"
+                        };
+                    })(userAgent.toLowerCase());
+            if (matched.browser) {
+                browser[matched.browser] = true;
+                browser.version = matched.version;
+            }
+            return browser;
+        }));
+    </script>
+</head>
+<body>
+</body>
+</html>

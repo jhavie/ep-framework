@@ -1,0 +1,85 @@
+allprojects {
+	repositories {
+		maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+		maven { url 'http://192.168.200.48:8081/repository/maven-public/' }
+	}
+}
+buildscript {
+	repositories {
+		mavenCentral()
+	}
+	ext {
+		springBootVersion = "2.0.7.RELEASE"
+		jarName = "frameworksvc"
+		epEntryDir = project.hasProperty('EP_ENTRY_DIR') ? String.valueOf(EP_ENTRY_DIR) : 'src'
+	}
+	dependencies {
+		classpath("org.springframework.boot:spring-boot-gradle-plugin:$springBootVersion")
+	}
+}
+
+apply plugin: 'java'
+apply plugin: 'maven' // 引入maven插件
+// Jar包名
+def jarName = rootProject.ext.jarName + ".jar"
+// Jar包名
+task buildSvcJar(dependsOn: ['server:build',clean]) <<{
+	copy() {
+		from("server/build/libs/server.jar")
+		into "build/"
+	}
+	def buildServer = file("build/server.jar")
+	def buildServerRename = file("build/" + jarName)
+	buildServer.renameTo(buildServerRename)
+}
+task buildUI (dependsOn: ['ui:buildDeploy',clean]) << {
+	def tmpDev = file("ui/build/ui-dev.tar")
+	def tmpTest = file("ui/build/ui-test.tar")
+	def tmpProd = file("ui/build/ui-prod.tar")
+	def fileDev = file("build/dev/ui-dev.tar")
+	def fileTest = file("build/test/ui-test.tar")
+	def fileProd = file("build/prod/ui-prod.tar")
+	fileDev.mkdirs()
+	fileDev.delete()
+	tmpDev.renameTo(fileDev)
+	fileTest.mkdirs()
+	fileTest.delete()
+	tmpTest.renameTo(fileTest)
+	fileProd.mkdirs()
+	fileProd.delete()
+	tmpProd.renameTo(fileProd)
+}
+
+task buildJar (dependsOn: ['buildSvcJar','ui:buildDeploy',clean]) << {
+	def tmpDev = file("ui/build/ui-dev.tar")
+	def tmpTest = file("ui/build/ui-test.tar")
+	def tmpProd = file("ui/build/ui-prod.tar")
+	def fileDev = file("build/dev/ui-dev.tar")
+
+	def fileTest = file("build/test/ui-test.tar")
+	def fileProd = file("build/prod/ui-prod.tar")
+	def fileJar = file("build/" + jarName)
+	fileDev.mkdirs()
+	fileDev.delete()
+	tmpDev.renameTo(fileDev)
+	fileTest.mkdirs()
+	fileTest.delete()
+	tmpTest.renameTo(fileTest)
+	fileProd.mkdirs()
+	fileProd.delete()
+	tmpProd.renameTo(fileProd)
+	["build/dev", "build/test", "build/prod"].each { dest ->
+		copy {
+			from "build/" + fileJar.getName()
+			into dest
+			from("server/dist/springBoot.sh")
+			into dest
+			from("server/dist/application_".concat(dest.replace('build/','')).concat(".yml"))
+			into dest
+			rename { String fileName ->
+				fileName.replace('_'.concat(dest.replace('build/','')), '')
+			}
+		}
+	}
+	fileJar.delete()
+}

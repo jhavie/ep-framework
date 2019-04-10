@@ -1,0 +1,29 @@
+--模拟数据
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '401页面', 'locked', '401', 'PAGER', 9, '401');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '404页面', 'alert-circled', '404', 'PAGER', 8, '404');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, 'Widgets', 'ios-game-controller-b', 'WIDGETS', 'FUNCTIONAL', 10, 'widgets');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '表格定制', 'cube', 'TABLE', 'FUNCTIONAL', 9, 'table');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '数据操作', 'social-windows', 'DATAOPERATE', 'FUNCTIONAL', 8, '2-2');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, 'Map 地图', 'map', 'widgets', '0', 40, 'map');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '首页', 'home', 'HOME', '0', 50, 'home');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, '权限测试页', 'locked', 'PERMISSION', '0', 30, 'permission');
+
+insert into GCC.GCC_GDWS_SYS_MENU(ID, MENU_NAME, MENU_ICON, MENU_CODE, PARENT_CODE, MENU_ORDER, MENU_URL)
+values(GCC.SEQ_GCC_GDWS_SYS_MENU_ID.nextval, 'Excel ', 'android-list', 'EXCEL', '0', 1, 'excel');
+
+COMMIT;

@@ -1,0 +1,70 @@
+{
+  "name": "EPFramework",
+  "version": "2.0.0",
+  "description": "Easipass Vue Project",
+  "author": "merjiezo <merjiezo@gmail.com>",
+  "private": true,
+  "scripts": {
+    "prebuild": "node ./bin/clean.js",
+    "build:router": "node ./bin/route-entry.js",
+    "buildConf:base": "node ./bin/build.conf.js",
+    "dev": "npm run build:router --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && vue-cli-service serve ",
+    "build": "npm run build:router --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && cross-env NODE_ENV=production vue-cli-service build",
+    "buildConf:dev": "npm run buildConf:base --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR",
+    "buildConf:test": "cross-env NODE_ENV=test npm run buildConf:base --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR",
+    "buildConf:prod": "cross-env NODE_ENV=production npm run buildConf:base --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR",
+    "build:conf": "npm run buildConf:dev --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run buildConf:test --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run buildConf:prod",
+    "build:deploy": "npm run build:router --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && cross-env NODE_ENV=production npm run build --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run build:conf --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && node ./bin/center-deploy.js",
+    "build:dev": "npm run build --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run buildConf:dev",
+    "build:test": "cross-env NODE_ENV=test npm run build  --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run buildConf:test",
+    "build:prod": "cross-env NODE_ENV=production npm run build  --EP_ENTRY_DIR=$npm_config_EP_ENTRY_DIR && npm run buildConf:prod",
+    "lint": "vue-cli-service lint"
+  },
+  "dependencies": {
+    "babel-polyfill": "^6.26.0",
+    "blueimp-md5": "^2.10.0",
+    "echarts": "^4.2.0-rc.1",
+    "ep-ui": "^1.4.81",
+    "fecha": "^2.3.3",
+    "fetch-jsonp": "^1.1.3",
+    "nprogress": "^0.2.0",
+    "vue": "^2.5.17",
+    "vue-router": "^3.0.1",
+    "vuex": "^3.0.1"
+  },
+  "devDependencies": {
+    "@vue/cli-plugin-babel": "^3.0.4",
+    "@vue/cli-plugin-eslint": "^3.0.4",
+    "@vue/cli-service": "^3.0.4",
+    "cross-env": "^5.2.0",
+    "fs-extra": "^7.0.1",
+    "json-templater": "^1.2.0",
+    "less": "^3.8.1",
+    "less-loader": "^4.1.0",
+    "vue-template-compiler": "^2.5.17"
+  },
+  "eslintConfig": {
+    "root": true,
+    "env": {
+      "node": true
+    },
+    "extends": [
+      "plugin:vue/essential",
+      "eslint:recommended"
+    ],
+    "rules": {},
+    "parserOptions": {
+      "parser": "babel-eslint"
+    }
+  },
+  "postcss": {
+    "plugins": {
+      "autoprefixer": {}
+    }
+  },
+  "browserslist": [
+    "> 1%",
+    "last 2 versions",
+    "not ie <= 8"
+  ]
+}

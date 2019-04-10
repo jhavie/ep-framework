@@ -1,0 +1,28 @@
+{
+  "title": "EP FRAME - ",
+  "smName": "EP",
+  "name": "<i class=\"ion-social-windows\"></i>FRAMEWORK",
+  "homeRoute": {
+    "name": "首页",
+    "path": "home"
+  },
+  "onlyAdminMenu": "ECS_CDGL|ECS_SKJG|ECS_CYCSPZ|ECS_YWLXWH|ECS_CZFWLB|ECS_DLYHXX|ECS_FSPZ",
+  "whiteList": [
+    "/login", "/signin", "/404", "/401"
+  ],
+  "loginWhiteList": [
+    "/home"
+  ],
+
+  "tokenName": "eptoken",
+  "tokenStrict": false,
+
+  "_routeStrategy": "allPass|tokenPass|authPass",
+  "routeStrategy": "authPass",
+
+  "_menuStrategy": "static|role|api",
+  "menuStrategy": "api",
+
+  "_theme": "blue|black",
+  "theme": "blue"
+}

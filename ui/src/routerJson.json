@@ -1,0 +1,39 @@
+{
+  "biz": {
+    "/map": {
+      "name": "输入",
+      "router": "map",
+      "meta": {
+        "muti": true,
+        "mutiName": "orderId"
+      }
+    },
+    "/widgets": {
+      "name": "Widgets",
+      "router": "widgets"
+    },
+    "/excel": {
+      "name": "权限测试页",
+      "router": "excel"
+    },
+    "/permission": {
+      "name": "权限测试页",
+      "router": "permission"
+    }
+  },
+  
+  "sys": {
+    "/home": {
+      "name": "首页",
+      "router": "home"
+    },
+    "/menu": {
+      "name": "菜单管理",
+      "router": "menu"
+    },
+    "/commConfig": {
+      "name": "通用表格",
+      "router": "commConfig"
+    }
+  }
+}

@@ -1,0 +1,57 @@
+{
+  "timeout": 45,
+  "sign": true,
+  "post": {
+    
+    
+    "_admin": "管理员接口",
+    "commConfigSearch": "/commConfig/search",
+    "commConfigSave": {
+      "url": "/commConfig/baseSqlHandle",
+      "showSuccess": true
+    },
+    "menusSearch": "/menu/search",
+    "menuSave": {
+      "url": "/menu/baseSqlHandle",
+      "showSuccess": true
+    },
+    
+   
+    "_framework": "框架接口",
+    "getUserInfo": {
+      "dataType": "form",
+      "url": "/userInfo",
+      "oauth": true
+    },
+    "sysLogin": {
+      "url": "/login",
+      "oauth": false
+    },
+    "sysLogout": {
+      "dataType": "form",
+      "url": "/loginOut",
+      "oauth": false
+    },
+    "resetPass": {
+      "dataType": "form",
+      "url": "/resetPass",
+      "showSuccess": true    
+    }
+  },
+
+
+  "get": {
+    "captchaUuid": {
+      "url": "/pcruuid",
+      "oauth": false
+    }
+  },
+  "async": {
+    
+  },
+  "jsonp": [
+    "http://cloud.easipass.com/EpNewsgator/epnewsgator/fetchjsonnewsdata",
+    "http://wthrcdn.etouch.cn/weather_mini?citykey=101020100",
+    "http://cloud.easipass.com/EpNewsgator/epnewsgator/fetchsinglejsonnewsdata"
+  ]
+}

@@ -1,0 +1,68 @@
+buildscript {
+  repositories {
+    maven { url 'http://maven.aliyun.com/nexus/content/groups/public' }
+  }
+
+  dependencies {
+    classpath 'com.moowork.gradle:gradle-node-plugin:1.1.0'
+  }
+
+}
+project(':ui') {
+
+  apply plugin: 'java'
+  apply plugin: 'com.moowork.node'
+  version '1.0-SNAPSHOT'
+
+  task cnpmInstall(type: NpmTask) {
+    group = 'node'
+    args = ['install', '--registry=https://registry.npm.taobao.org']
+  }
+
+  // 包部署
+  task buildUI(type: NpmTask, dependsOn: cnpmInstall) {
+    group = 'node'
+    args = ['run', 'build:deploy', '--EP_ENTRY_DIR=' + rootProject.ext.epEntryDir]
+  }
+
+  // 开发部署
+  task compressUIDev(type:Tar) {
+    from('build/dev/') {
+      include '**/*.*'
+    }
+    archiveName 'ui-dev.tar'
+    destinationDir(file('build/'))
+  }
+
+// 测试部署
+  task compressUITest(type:Tar) {
+    from('build/test/') {
+      include '**/*.*'
+    }
+    archiveName 'ui-test.tar'
+    destinationDir(file('build/'))
+  }
+
+// 生产部署
+  task compressUIProd(type:Tar) {
+    from('build/prod/') {
+      include '**/*.*'
+    }
+    archiveName 'ui-prod.tar'
+    destinationDir(file('build/'))
+  }
+
+  compressUIDev.mustRunAfter 'buildUI'
+  compressUITest.mustRunAfter 'compressUIDev'
+  compressUIProd.mustRunAfter 'compressUITest'
+
+  task buildDeploy (dependsOn: ['buildUI', 'compressUIDev', 'compressUITest', 'compressUIProd']) <<{
+    def tmpDev = file("build/dev")
+    def tmpTest = file("build/test")
+    def tmpProd = file("build/prod")
+
+    tmpDev.deleteDir()
+    tmpTest.deleteDir()
+    tmpProd.deleteDir()
+  }
+}

@@ -1,0 +1,5 @@
+rootProject.name = 'ep-framework'
+include 'ui'
+include 'server'
+
+
